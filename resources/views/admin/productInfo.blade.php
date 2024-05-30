@@ -1,4 +1,5 @@
 @extends('layouts.admin')
+{{-- testing --}}
 @section('title', 'ProductInfo')
 
 @section('body')
