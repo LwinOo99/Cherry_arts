@@ -14,7 +14,17 @@ $(document).ready(function () {
         }
     });
 
-    // $('#pictureBtn').click(function(){
-    //     alert("ok")
-    // })
+    $("#pCategory").click(function(){
+        $(this).addClass("text-red-600 ")
+        $(this).removeClass("text-blue-600 ")
+        $("#categoryClose").removeClass("hidden")
+        $('.newCategory').removeClass("hidden")
+    })
+
+    $("#categoryClose").click(function(){
+        $("#pCategory").addClass("text-blue-600 ")
+        $("#pCategory").removeClass("text-red-600 ")
+        $("#categoryClose").addClass("hidden")
+        $('.newCategory').addClass("hidden")
+    })
 });

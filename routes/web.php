@@ -35,3 +35,6 @@ Route::get('/marketPlace', [App\Http\Controllers\MarketPlaceController::class, '
 
 // Route::get('/manageProducts', [App\Http\Controllers\Admin\ManageProductController::class, 'index'])->name('admin.manageProducts');
 Route::resource('/manageProduct', App\Http\Controllers\Admin\ManageProductController::class);
+Route::resource('/productCategory', App\Http\Controllers\categoryController::class);
+// Route::resource('/productCategory', App\Http\Controllers\Admin\productCategoryController::class);
+

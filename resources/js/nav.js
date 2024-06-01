@@ -8,6 +8,6 @@ $(document).ready(function(){
         $('#navbar-default a').removeClass('underline');
         // Add active class to the clicked anchor tag
         $(this).addClass('underline');
-        alert('Ok')
+        // alert('Ok')
     });
 });

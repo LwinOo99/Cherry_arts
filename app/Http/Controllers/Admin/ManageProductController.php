@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 
 use App\Models\Product;
+use App\Models\pCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -32,7 +33,14 @@ class ManageProductController extends Controller
      */
     public function create()
     {
-        return View('admin.addProducts');
+
+        $product = new pCategory();
+        $pCategory = $product->getAll();
+        // dd($pCategory);
+
+        return View('admin.addProducts',[
+            "p_category"=> $pCategory
+        ]);
 
     }
 

@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','manageCreateProduct')
+@section('title', 'manageCreateProduct')
 
 @section('body')
     <div class="container mx-auto px-4 py-8">
@@ -13,7 +13,7 @@
                 <h2 class="mb-4 text-xl font-bold text-gray-900 dark:text-white">Add a new product</h2>
 
                 <img class="h-80 max-w-lg rounded-lg" id="picture" src="/defaultImage.png" alt="image description">
-                <form action="/manageProduct" method="POST" enctype="multipart/form-data"> 
+                <form action="/manageProduct" method="POST" enctype="multipart/form-data">
                     @csrf
 
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input">Upload
@@ -48,14 +48,36 @@
                         <div>
                             <label for="category"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category"
-                                name="p_category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <select id="category" name="p_category"
+                                class="mb-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                                 <option selected="">Select category</option>
-                                <option value="Toys">Toys</option>
-                                <option value="Handmade">Handmade Bags</option>
-                                <option value="Crochet">Crochet</option>
-                                <option value="Others">Others</option>
+                                @forelse ($p_category as $category)
+                                    <option value="{{ $category->id }}">{{ $category->c_name }}</option>
+
+                                @empty
+                                @endforelse
                             </select>
+                            {{-- <a href="/productCategory" class="underline text-blue-600 visited:text-purple-600">Add new category</a> --}}
+                            {{-- <form action="/productCategory" method="POST">
+                                <label id="pCategory" class="underline text-blue-600  ">Add New Category
+
+                                </label>
+                                <span id="categoryClose" class="hidden text-2xl text-center text-red-500"><iconify-icon
+                                        icon="ri:close-line"></iconify-icon></span>
+
+                                <div class="w-full">
+                                    <label for="newCategory"
+                                        class="mt-2 newCategory hidden block mb-2 text-sm font-medium text-gray-900 dark:text-white">New
+                                        Category</label>
+                                    <input type="text" name="newCategory"
+                                        class="newCategory hidden bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                        placeholder="New Category">
+                                </div>
+                                <button type="submit"
+                                    class="newCategory hidden inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
+                                    Add
+                                </button>
+                            </form> --}}
                         </div>
                         <div>
                             <label for="item-height"
@@ -77,6 +99,7 @@
                         class="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 dark:focus:ring-blue-900 hover:bg-blue-800">
                         Add product
                     </button>
+                    {{-- <a href="/productCategory">testing</a> --}}
                 </form>
             </div>
         </section>

@@ -8,6 +8,7 @@
     <link href="./output.css" rel="stylesheet">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
 
     <title>@yield('title')</title>
     <!-- Include Tailwind CSS -->
