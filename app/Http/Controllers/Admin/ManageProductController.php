@@ -20,8 +20,10 @@ class ManageProductController extends Controller
 
         $product =new Product();
         $productList = $product->productList();
+        // dd($productList->p_categories);
+
         Log::channel("customlog")->info("End Product index function.");
-        // dd($productList);
+
         return View("admin.showProducts",[
             "productList"=> $productList,
         ]);
@@ -62,12 +64,10 @@ class ManageProductController extends Controller
      */
     public function show(string $id)
     {
-        Log::channel("customlog")->info("Start Product show function.");
-
         $product = new Product();
         $productInfo= $product->showProduct($id);
-        Log::channel("customlog")->info("End Product show function.");
-        // dd($productInfo);
+        $category= $productInfo->category;
+
         return view("admin.productInfo",[
             "productInfo"=> $productInfo
         ]);
@@ -82,10 +82,12 @@ class ManageProductController extends Controller
 
         $product = new Product();
         $productInfo= $product->showProduct($id);
+        $product = new pCategory();
+        $pCategory = $product->getAll();
         Log::channel("customlog")->info("End Product edit function.");
-        // dd($productInfo);
+
         return view("admin.editProduct",[
-            "productInfo"=> $productInfo
+            "productInfo"=> $productInfo, "p_category" => $pCategory
         ]);
     }
 

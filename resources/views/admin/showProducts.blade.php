@@ -70,7 +70,7 @@
                                 {{ $product->p_code }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $product->p_category }}
+                                {{ $product->category->c_name}}
                             </td>
                             <td class="px-6 py-4">
                                 {{ $product->p_price }} mmk

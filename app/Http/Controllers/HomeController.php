@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
+use App\Models\pCategory;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -14,6 +16,7 @@ class HomeController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+
     }
 
     /**
@@ -23,6 +26,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('userHome');
+
+
+        $product = new Product();
+        $productList = $product->productList();
+        $category = new pCategory();
+        $categoryList = $category->getAll();
+        $lastTwo = $product->lastTwo();
+
+
+        return view('admin.adminHome',[
+            'productList'=>$productList, 'categoryList'=>$categoryList, 'lastTwo' =>$lastTwo,
+        ]);
     }
 }

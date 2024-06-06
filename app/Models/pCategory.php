@@ -15,6 +15,10 @@ class pCategory extends Model
 {
     use HasFactory;
 
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
     public function getAll(){
         return DB::table("p_categories")->where("del_flg","=",0)->get();
     }

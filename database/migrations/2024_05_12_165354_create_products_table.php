@@ -15,14 +15,14 @@ return new class extends Migration
             $table->id();
             $table->string('p_name',256);
             $table->string('p_code');
-            $table->unsignedBigInteger('p_category');
+            $table->unsignedBigInteger('category_id');
             $table->integer('p_price');
             $table->integer('p_height');
             $table->string('p_des',256);
             $table->string('p_picture',256);
             $table->integer('del_flg')->default(0);
             $table->timestamps();
-            $table->foreign('p_category')
+            $table->foreign('category_id')
             ->references('id')
             ->on('p_categories')
             ->onUpdate('cascade')

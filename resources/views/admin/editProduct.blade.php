@@ -58,13 +58,14 @@
                         <div>
                             <label for="category"
                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category" name="p_category"
+                            <select id="category" name="category_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                                <option selected="">{{ $productInfo->p_category }}</option>
-                                <option value="Toys">Toys</option>
-                                <option value="Handmade">Handmade Bags</option>
-                                <option value="Crochet">Crochet</option>
-                                <option value="Others">Others</option>
+                                <option selected="">{{ $productInfo->category->c_name }}</option>
+                                @forelse ($p_category as $category)
+                                    <option value="{{ $category->id }}">{{ $category->c_name }}</option>
+
+                                @empty
+                                @endforelse
                             </select>
                         </div>
                         <div>

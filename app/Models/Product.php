@@ -18,19 +18,31 @@ class Product extends Model
 {
     use HasFactory;
 
+    public function category(){
+        return $this->belongsTo(pCategory::class);
+    }
+
     public function getAll(){
         Log::channel("customlog")->info("Start Product getAll function.");
 
         // return DB::table("products")->take(5)->where("del_flg","=",0)->get();
         return DB::table("products")->where("del_flg","=",0)->get();
+        // return Product::has("p_categories")->where("del_flg","=",0)->get();
+
     }
 
     public function productList(){
         Log::channel("customlog")->info("Start Product productList function.");
         
         // return DB::table("products")->orderBy("id", "DESC")->where("del_flg","=",0);
-        return DB::table("products")->orderBy("id", "DESC")->where("del_flg","=",0)->paginate(10);
+        // return Product::has("p_categories")->orderBy("id", "DESC")->where("del_flg","=",0)->paginate(10);
+        return Product::has("category")->orderBy("id", "DESC")->where("del_flg","=",0)->paginate(10);
     }
+    public function lastTwo(){
+        return Product::has("category")->orderBy("id", "DESC")->where("del_flg","=",0)->take(2)->get();
+
+    }
+
 
     public function insert(Request $request){
         // Log::channel("customlog")->info("Start Product insert function.");
@@ -41,11 +53,12 @@ class Product extends Model
             // $path = Storage::disk('public')->put('productImage' , $file);
             $path = Storage::disk('public')->put('productImage' , $file);
         } 
+
         DB::table('products')
         ->insert([
             "p_name"=>$request->p_name,
             "p_code"=>$request->p_code,
-            "p_category" =>$request->p_category,
+            "category_id" =>$request->category_id,
             "p_price"=>$request->p_price,
             "p_height"=>$request->p_height,
             "p_des"=>$request->p_des,
@@ -58,32 +71,10 @@ class Product extends Model
     public function showProduct($id){
         Log::channel("customlog")->info("Start Product showProduct function.");
 
-        return DB::table('products')
-        ->find($id);
+        return Product::find($id);
     }
 
 
-    // public function updateProductById($id,Request $request){
-    //     Log::channel("customlog")->info("Start Product updateProductById function.");
-    //     $path= null;
-    //     if ($request->hasFile("p_picture")) {
-    //         $file= $request->file("p_picture"); 
-    //         // $path = $file->store("doctorProfile");
-    //         $path = Storage::disk('public')->put('productImage' , $file);
-    //     }
-    //     DB::table('products')
-    //     ->where("id","=",$id)
-    //     ->update([
-    //         "p_name"=>$request->p_name,
-    //         "p_picture"=>$path,
-    //         "p_code"=>$request->p_code,
-    //         "p_category" =>$request->p_category,
-    //         "p_price"=>$request->p_price,
-    //         "p_height"=>$request->p_height,
-    //         "p_des"=>$request->p_des,
-    //     ]);
-    //     Log::channel("customlog")->info("End Product updateProductById function.");
-    // }
     public function updateProductById($id, Request $request){
         Log::channel("customlog")->info("Start Product updateProductById function.");
         
@@ -111,7 +102,7 @@ class Product extends Model
                 "p_name" => $request->p_name,
                 "p_picture" => $path,
                 "p_code" => $request->p_code,
-                "p_category" => $request->p_category,
+                "category_id" =>$request->category_id,
                 "p_price" => $request->p_price,
                 "p_height" => $request->p_height,
                 "p_des" => $request->p_des,
